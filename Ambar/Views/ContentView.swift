@@ -14,35 +14,37 @@ struct ContentView: View {
     @FetchRequest( sortDescriptors: [] ) var item : FetchedResults<Items>
 
     var body: some View {
-     
+        VStack {
         VStack(alignment: .leading, spacing: 0) {
             List {
                 ForEach(item.indices, id: \.self) { index in   // << here !!
                    Text( item[index].name!)
                 }
             }
-            Button(action: addItem, label: {
-                Text("Add Text")
-            })
+           
+        }.frame(width: 400, height: 300, alignment: .leading)
+            Button(action: {
+                NSApp.sendAction(#selector(AppDelegate.openPreferencesWindow), to: nil, from:nil)
+            }) {
+                Text("Preferences").font(.largeTitle).foregroundColor(.primary)
+            }
         }
-    }
+        
     
-    private func addItem() {
-        print("Add")
-        let p = Items(context: viewContext)
-  
-        p.name = "Matt"
-        p.value = "Testing"
-        do {
-            try  viewContext.save()
-        }
-        catch {
-            let nsError = error as NSError
-          fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-
+//            NavigationLink(
+//                destination: AddView(),
+//                label: {
+//                    Text("Add New")
+//                        .font(.subheadline)
+//                        .foregroundColor(Color.gray)
+//                })
+//           }
+        
     }
 }
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
