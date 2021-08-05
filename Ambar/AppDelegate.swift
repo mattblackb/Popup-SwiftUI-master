@@ -31,7 +31,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                preferencesWindow.center()
                preferencesWindow.setFrameAutosaveName("Preferences")
                preferencesWindow.isReleasedWhenClosed = false
-               preferencesWindow.contentView = NSHostingView(rootView: AddView().environment(\.managedObjectContext, persistenceController.container.viewContext))
+               preferencesWindow.contentView = NSHostingView(rootView: DefaultView().environment(\.managedObjectContext, persistenceController.container.viewContext))
            }
            preferencesWindow.makeKeyAndOrderFront(nil)
        }
