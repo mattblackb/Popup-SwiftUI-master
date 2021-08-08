@@ -20,9 +20,8 @@ struct DefaultView: View {
    
             NavigationView {
                 VStack {
-                    Text("Hello World")
+                    Text("Please Select")
                     List(item) { item in
-                        Text(item.name!)
                         NavigationLink(
                                                    destination: EditView(person : item),
                                                    label: {
@@ -32,6 +31,11 @@ struct DefaultView: View {
                                                    })
                        
                     }
+                    NavigationLink(
+                                               destination: AddView(),
+                                               label: {
+                                                   Text("Add New")
+                                               })
 //                    ForEach(item.indices, id: \.self) { index in
 //
 //                        NavigationLink(
@@ -91,7 +95,7 @@ struct DefaultView: View {
 
 struct DefaultView_Previews: PreviewProvider {
     static var previews: some View {
-        DefaultView()
+        DefaultView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }
 }
 

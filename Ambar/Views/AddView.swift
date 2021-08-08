@@ -13,12 +13,26 @@ struct AddView: View {
     @FetchRequest( sortDescriptors: [] ) var people : FetchedResults<Items>
     
     @State var pname = ""
+    @State var pdesc = ""
+    @State var plink = ""
     
     var body: some View {
         VStack {
+            Text("Display Name")
+        
         TextField("", text: $pname, onCommit: {
           
         }).padding()
+            
+            Text("Description")
+            TextField("", text: $pdesc, onCommit: {
+              
+            }).padding()
+            
+            Text("Link")
+            TextField("", text: $plink, onCommit: {
+              
+            }).padding()
             Button(action: addItem, label: {
                 /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
             })
@@ -39,7 +53,9 @@ struct AddView: View {
         let p = Items(context: viewContext)
 
         p.name = self.pname
-        print(self.pname)
+        p.desc = self.pdesc
+        p.value = self.plink
+        print(self.pdesc)
         do {
             try  viewContext.save()
         }

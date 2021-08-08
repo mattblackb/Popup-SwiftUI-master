@@ -13,26 +13,45 @@ struct EditView: View {
 //    var index: Person
     var person: Items
     @State var pname = ""
+    @State var desc = ""
+    @State var value = ""
     
     var body: some View {
         VStack {
-        Text("Hi")
-            Text(person.name!)
-        
-        HStack {
-            TextField("", text: $pname, onCommit: {
-                person.name = self.pname
-                try! viewContext.save()
-              })
-            .onAppear {
-                self.pname = self.person.name != nil ? "\(self.person.name!)" : ""
-            }
-            Button(action: {
-                person.name = self.pname
-                try! viewContext.save()
-            }) {
-                    Text("Confirm")
+            Text("Edit: "+person.name!)
+      
+  
+            VStack {
+                Text("Display Name")
+                TextField("", text: $pname, onCommit: {
+                    person.name = self.pname
+                    try! viewContext.save()
+                  })
+                .onAppear {
+                    self.pname = self.person.name != nil ? "\(self.person.name!)" : ""
                 }
+                Text("Description")
+                TextField("", text: $desc, onCommit: {
+                    person.desc = self.desc
+                    try! viewContext.save()
+                  })
+                .onAppear {
+                    self.desc = self.person.desc != nil ? "\(self.person.desc!)" : ""
+                }
+                Text("Link")
+                TextField("", text: $value, onCommit: {
+                    person.value = self.value
+                    try! viewContext.save()
+                  })
+                .onAppear {
+                    self.value = self.person.value != nil ? "\(self.person.value!)" : ""
+                }
+                Button(action: {
+                    person.name = self.pname
+                    try! viewContext.save()
+                }) {
+                        Text("Save Data")
+                    }
         }
         .padding()
         }
