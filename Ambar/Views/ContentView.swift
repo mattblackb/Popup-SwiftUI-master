@@ -17,12 +17,13 @@ struct ContentView: View {
 
    
     var body: some View {
-        VStack {
-            VStack(alignment: .leading, spacing: 0) {
+        VStack(spacing: 0) {
+            VStack(alignment: .leading) {
                 List {
                     ForEach(item.indices, id: \.self) { index in   // << here !!
                     HStack {
                         Text( item[index].name!)
+                        Spacer()
                         Button {
                                     NSPasteboard.general.clearContents()
                                     NSPasteboard.general.setString( item[index].value! , forType: .string)
@@ -30,35 +31,37 @@ struct ContentView: View {
                                      Text("Copy")
                                  }
                       
-                        }
+                    }
                     }
                 }
                
             }.frame(width: 400, height: 300, alignment: .leading)
-            
-            HStack {
+            HStack(alignment: .center, spacing: 0, content: {
+                Spacer()
                 Button(action: {
                     NSApplication.shared.terminate(self)
                 }) {
                     Text("Quit App")
-                    .font(.caption)
-                    .fontWeight(.semibold)
-                
+                        .font(.body)
+                        .fontWeight(.semibold)
                 }
+                Spacer()
+                Button(action: {
+                    NSApp.sendAction(#selector(AppDelegate.openPreferencesWindow), to: nil, from:nil)
+                }) {
+                    Text("Preferences").font(.body)
+                        .fontWeight(.semibold)
                     
-                    Button(action: {
-                        NSApp.sendAction(#selector(AppDelegate.openPreferencesWindow), to: nil, from:nil)
-                    }) {
-                        Text("Preferences").font(.caption)
-                            .fontWeight(.semibold)
-                        
-                    }
-                
                 }
-            LaunchAtLogin.Toggle {
+                Spacer()
+                LaunchAtLogin.Toggle {
                         Text("Launch at login")
                     }
-            }
+                Spacer()
+               
+            }).frame(width: 400, height: 50, alignment: .leading)
+        
+        }
         
     
 //            NavigationLink(

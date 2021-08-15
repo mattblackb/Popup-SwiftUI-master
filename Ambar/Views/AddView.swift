@@ -21,42 +21,49 @@ struct AddView: View {
 
     
     var body: some View {
-        VStack(alignment: .leading) {
-      
-            if warning != "" {
-                Text(self.warning)
-                    .foregroundColor(.red)
-                    .padding( 20)
-                    .font(.title)
-                
-            
-            }
-            
-            Text("Display Name")
-                .padding(.leading, 20)
-                
-        
-        TextField("", text: $pname, onCommit: {
-          
-        }).padding()
-          
-            Text("Description")
-                .padding(.leading, 20)
-            TextField("", text: $pdesc, onCommit: {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing:0, content: {
+                    Text("Add new item")
+                        .padding(20)
+                        .foregroundColor(.gray)
+                        .font(/*@START_MENU_TOKEN@*/.title/*@END_MENU_TOKEN@*/)
               
-            }).padding()
+                    if warning != "" {
+                        Text(self.warning)
+                            .foregroundColor(.red)
+                            .padding(.leading,  20)
+                            .font(.title)
+                    }
+                    
+                    Text("Display Name")
+                        .padding(.leading, 20)
+                        
+                
+                TextField("", text: $pname, onCommit: {
+                  
+                }).padding(20)
+                  
+                    Text("Description")
+                        .padding(.leading, 20)
+                    TextField("", text: $pdesc, onCommit: {
+                      
+                    }).padding(20)
+                    
+                    Text("Link")
+                        .padding(.leading, 20)
+                    TextField("", text: $plink, onCommit: {
+                      
+                    }).padding(20)
+                    Button(action: addItem, label: {
+                        Text("Save")
+                    })
+                    .padding(.leading, 20)
+                    
+                    
+                    Spacer()            })
+     
+          
             
-            Text("Link")
-                .padding(.leading, 20)
-            TextField("", text: $plink, onCommit: {
-              
-            }).padding()
-            Button(action: addItem, label: {
-                Text("Save")
-            })
-            .padding(.leading, 20)
-//
-        
         }
     }
     

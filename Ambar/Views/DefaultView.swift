@@ -15,28 +15,30 @@ struct DefaultView: View {
     @FetchRequest( sortDescriptors: [] ) var item : FetchedResults<Items>
 
     var body: some View {
-        
-        
-   
-            NavigationView {
+            NavigationView() {
                 VStack {
                     Text("Please Select")
+                    Divider()
                     List(item) { item in
                         NavigationLink(
                                                    destination: EditView(person : item),
                                                    label: {
                                                     Text(item.name!)
                                                            .font(.subheadline)
-                                                           .foregroundColor(Color.gray)
+                                                           .foregroundColor(Color.white)
+                                                        .padding(.leading, 20)
                                                    })
+                    
                        
                     }
+                    Divider()
+                    Spacer()
                     NavigationLink(
                                                destination: AddView(),
                                                label: {
                                                    Text("Add New")
                                                })
-
+                    Spacer()
                 }
             }
     
