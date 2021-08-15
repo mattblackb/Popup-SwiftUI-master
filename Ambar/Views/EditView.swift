@@ -46,12 +46,21 @@ struct EditView: View {
                 .onAppear {
                     self.value = self.person.value != nil ? "\(self.person.value!)" : ""
                 }
+                HStack {
                 Button(action: {
                     person.name = self.pname
                     try! viewContext.save()
                 }) {
                         Text("Save Data")
                     }
+                Button(action: {
+             
+                     viewContext.delete(person)
+                    try! viewContext.save()
+                }) {
+                        Text("Delete Data")
+                    }
+                }
         }
         .padding()
         }

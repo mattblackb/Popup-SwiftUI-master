@@ -36,66 +36,17 @@ struct DefaultView: View {
                                                label: {
                                                    Text("Add New")
                                                })
-//                    ForEach(item.indices, id: \.self) { index in
-//
-//                        NavigationLink(
-//                            destination: EditView(person : item[index]),
-//                            label: {
-//                                Text(item[index].name!)
-//                                    .font(.subheadline)
-//                                    .foregroundColor(Color.gray)
-//                            })
-//
-//                        if(index+1 == item.count ) {
-//                                                NavigationLink(
-//                                                    destination: AddView(),
-//                                                    label: {
-//                                                        Text("Add New")
-//                                                    })
-//                                            }
-//
-//
-//                    }
-                       
-                   
-//                    NavigationLink(destination: AddView()) {
-//                        Text("Do Something")
-//                    }
-//                    NavigationLink(destination: AddView()) {
-//                        Text("Do Something Else")
-//                    }
+
                 }
             }
     
-        
-        
-    
-//        NavigationView {
-//            List(item) { note in
-//                ForEach(item.indices, id: \.self) { index in   // << here !!
-//                                        HStack {
-//                                            Text( item[index].name!)
-//
-//                                        }
-//                    if(index+1 == item.count ) {
-//                        NavigationLink(
-//                            destination: AddView(),
-//                            label: {
-//                                Text("Add New")
-//                            })
-//                    }
-//                                    }
-////            }
-//            Text("Select a Note")
-           
         }
-        
-//    }
+
 }
 
 struct DefaultView_Previews: PreviewProvider {
     static var previews: some View {
-        DefaultView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+        DefaultView()
     }
 }
 

@@ -15,33 +15,47 @@ struct AddView: View {
     @State var pname = ""
     @State var pdesc = ""
     @State var plink = ""
+    @State var warning = ""
+    @State private var alertShowing = false
+    
+
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
+      
+            if warning != "" {
+                Text(self.warning)
+                    .foregroundColor(.red)
+                    .padding( 20)
+                    .font(.title)
+                
+            
+            }
+            
             Text("Display Name")
+                .padding(.leading, 20)
+                
         
         TextField("", text: $pname, onCommit: {
           
         }).padding()
-            
+          
             Text("Description")
+                .padding(.leading, 20)
             TextField("", text: $pdesc, onCommit: {
               
             }).padding()
             
             Text("Link")
+                .padding(.leading, 20)
             TextField("", text: $plink, onCommit: {
               
             }).padding()
             Button(action: addItem, label: {
-                /*@START_MENU_TOKEN@*/Text("Button")/*@END_MENU_TOKEN@*/
+                Text("Save")
             })
-//        Button(action: {
-//            addItem()
-//        }) {
-//                Label("Confirm", systemImage: "pencil.circle.fill")
-//            }
-//        }
+            .padding(.leading, 20)
+//
         
         }
     }
@@ -49,33 +63,24 @@ struct AddView: View {
     
     
     private func addItem() {
-        
-        let p = Items(context: viewContext)
-
-        p.name = self.pname
-        p.desc = self.pdesc
-        p.value = self.plink
-        print(self.pdesc)
-        do {
-            try  viewContext.save()
+        if(self.plink == "" || self.plink == "null"){
+            self.warning =  "Please set a link!"
+        } else if (self.pname == "" || self.pname == "null"){
+            self.warning =  "Please set a display name!"
+        } else {
+            let p = Items(context: viewContext)
+            p.name = self.pname
+            p.desc = self.pdesc
+            p.value = self.plink
+//            print("Not Linlk"+self.plink)
+            do {
+                try  viewContext.save()
+            }
+            catch {
+                let nsError = error as NSError
+              fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+            }
         }
-        catch {
-            let nsError = error as NSError
-          fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-        }
-    //        withAnimation {
-    //            let newItem = Item(context: viewContext)
-    //            newItem.timestamp = Date()
-    //
-    //            do {
-    //                try viewContext.save()
-    //            } catch {
-    //                // Replace this implementation with code to handle the error appropriately.
-    //                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-    //                let nsError = error as NSError
-    //                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-    //            }
-    //        }
     }
     
 }

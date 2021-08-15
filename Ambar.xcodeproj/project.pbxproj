@@ -3,12 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		822920C826AF09C400E5934C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 822920C726AF09C400E5934C /* AddView.swift */; };
 		823CB60226B998CC009A5270 /* DefaultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 823CB60126B998CC009A5270 /* DefaultView.swift */; };
+		82420F9226C953D90081CEB5 /* LaunchAtLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 82420F9126C953D90081CEB5 /* LaunchAtLogin */; };
 		8257BA6F26BC49EB00A9EC53 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8257BA6E26BC49EB00A9EC53 /* EditView.swift */; };
 		846BD60026ADAA1C006457D4 /* DataSets.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 846BD5FE26ADAA1C006457D4 /* DataSets.xcdatamodeld */; };
 		846BD63926ADB068006457D4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846BD63826ADB068006457D4 /* Persistence.swift */; };
@@ -46,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82420F9226C953D90081CEB5 /* LaunchAtLogin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,12 +126,16 @@
 				A70B622C237AF87000A2BA73 /* Sources */,
 				A70B622D237AF87000A2BA73 /* Frameworks */,
 				A70B622E237AF87000A2BA73 /* Resources */,
+				82420F9326C954360081CEB5 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = Ambar;
+			packageProductDependencies = (
+				82420F9126C953D90081CEB5 /* LaunchAtLogin */,
+			);
 			productName = Ambar;
 			productReference = A70B6230237AF87000A2BA73 /* Ambar.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +164,9 @@
 				Base,
 			);
 			mainGroup = A70B6227237AF87000A2BA73;
+			packageReferences = (
+				82420F9026C953D90081CEB5 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */,
+			);
 			productRefGroup = A70B6231237AF87000A2BA73 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -179,6 +188,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		82420F9326C954360081CEB5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${BUILT_PRODUCTS_DIR}/LaunchAtLogin_LaunchAtLogin.bundle/Contents/Resources/copy-helper-swiftpm.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		A70B622C237AF87000A2BA73 /* Sources */ = {
@@ -245,7 +274,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -307,7 +336,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -399,6 +428,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		82420F9026C953D90081CEB5 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sindresorhus/LaunchAtLogin";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		82420F9126C953D90081CEB5 /* LaunchAtLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 82420F9026C953D90081CEB5 /* XCRemoteSwiftPackageReference "LaunchAtLogin" */;
+			productName = LaunchAtLogin;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		846BD5FE26ADAA1C006457D4 /* DataSets.xcdatamodeld */ = {
