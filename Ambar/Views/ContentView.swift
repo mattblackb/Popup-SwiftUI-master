@@ -10,6 +10,7 @@ import SwiftUI
 import AppKit
 import LaunchAtLogin
 
+
 struct ContentView: View {
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -30,6 +31,11 @@ struct ContentView: View {
                                  } label: {
                                      Text("Copy")
                                  }
+                        Button("Go") {
+                            if let url = URL(string: item[index].value!) {
+                                 NSWorkspace.shared.open(url)
+                             }
+                             }
                       
                     }
                     }
