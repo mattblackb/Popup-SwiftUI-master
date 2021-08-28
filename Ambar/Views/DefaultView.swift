@@ -10,36 +10,28 @@ import SwiftUI
 import AppKit
 
 struct DefaultView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest( sortDescriptors: [] ) var item : FetchedResults<Items>
+    @State var selection = 1
 
     var body: some View {
-            NavigationView() {
-                VStack {
-                    Text("Please Select")
-                    Divider()
-                    List(item) { item in
-                        NavigationLink(
-                                                   destination: EditView(person : item),
-                                                   label: {
-                                                    Text(item.name!)
-                                                           .font(.subheadline)
-                                                           .foregroundColor(Color.white)
-                                                        .padding(.leading, 20)
-                                                   })
-                    
-                       
+        Spacer()
+        TabView(selection: $selection) {
+            EditAddView()
+                        .tabItem {
+                            VStack {
+                                Text("Edit/Add Items")
+                            }
+
+                        }.tag(1)
+            
+        
+            Preferences()
+                .tabItem {
+                    VStack {
+                        Image("icons.general.home")
+                        Text("Preferences")
                     }
-                    Divider()
-                    Spacer()
-                    NavigationLink(
-                                               destination: AddView(),
-                                               label: {
-                                                   Text("Add New")
-                                               })
-                    Spacer()
-                }
+
+                }.tag(2)
             }
     
         }

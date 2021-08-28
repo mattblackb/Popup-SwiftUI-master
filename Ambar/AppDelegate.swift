@@ -11,12 +11,13 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    
+    @StateObject var PreferencesObj = PreferencesClass()
     var preferencesWindow: NSWindow!    // << here
-    
     var popover = NSPopover.init()
     var statusBar: StatusBarController?
     let persistenceController = PersistenceController.shared
+    
+
     
     
     @objc func openPreferencesWindow() {
@@ -24,14 +25,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //               let preferencesView = AddView()
                // Create the preferences window and set content
                preferencesWindow = NSWindow(
-                   contentRect: NSRect(x: 20, y: 20, width: 480, height: 300),
+                   contentRect: NSRect(x: 20, y: 20, width: 480, height: 350),
                    styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                    backing: .buffered,
                    defer: false)
                preferencesWindow.center()
                preferencesWindow.setFrameAutosaveName("Preferences")
                preferencesWindow.isReleasedWhenClosed = false
-               preferencesWindow.contentView = NSHostingView(rootView: DefaultView().environment(\.managedObjectContext, persistenceController.container.viewContext))
+            preferencesWindow.contentView = NSHostingView(rootView: DefaultView().environment(\.managedObjectContext, persistenceController.container.viewContext))
+            preferencesWindow.level = .floating
            }
            preferencesWindow.makeKeyAndOrderFront(nil)
        }
@@ -40,8 +42,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Create the SwiftUI view that provides the contents
-     let contentView = ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
         
+    
+     let contentView = ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
+        PreferencesClass.init()
 
         // Set the SwiftUI's ContentView to the Popover's ContentViewController
         popover.contentViewController = MainViewController()
