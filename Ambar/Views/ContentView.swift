@@ -12,25 +12,19 @@ import AppKit
 
 
 struct ContentView: View {
+    @ObservedObject var searchStatus = UserSettings()
     
     @Environment(\.managedObjectContext) private var viewContext
     @State  var searchText = ""
-    @State  var toggleSearch: Bool
+
     @FetchRequest( sortDescriptors: [NSSortDescriptor(key:"name", ascending:true)] ) var item : FetchedResults<Items>
-    let currentStateInitial = UserDefaults.standard.object(forKey:"showSearch") as? Bool
-    
-    init() {
-        let currentStateInitial = UserDefaults.standard.object(forKey:"showSearch") as? Bool
-        let initialValue = currentStateInitial!
-        print(currentStateInitial!)
-        _toggleSearch = State<Bool>(initialValue: initialValue)
-    }
+ 
     
     
     var body: some View {
         VStack(spacing: 0) {
             VStack(alignment: .leading) {
-                SearchBar(toggleSearch: $toggleSearch, searchText: $searchText).padding()
+                SearchBar(searchText: $searchText).padding()
                 List {
                     ForEach(item.indices, id: \.self) { index in   // << here !!
                         if item[index].name!.contains(searchText) || searchText ==  ""  {
@@ -76,7 +70,9 @@ struct ContentView: View {
                 }
             
                 Button(action: {
-                    toggleSearch.toggle()
+                    searchStatus.showSearch.toggle()
+                    
+                    
                 }) {
                     Image("search").resizable().frame(width: 12, height: 12)
                     

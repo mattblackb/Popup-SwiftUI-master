@@ -9,34 +9,21 @@
 import SwiftUI
 
 struct SearchBar: View {
-
-    @StateObject var progress = PreferencesClass()
     @State var currentState = false;
-    @Binding var toggleSearch : Bool
     @Binding var searchText : String
+    @ObservedObject var searchStatus = UserSettings()
     
 //
 
     
     var body: some View {
        
-        if(toggleSearch) {
+        if(searchStatus.showSearch) {
             TextField("Search: ", text: $searchText)
         }
 
     }
-    func setStateVariable(value: Bool) {
-        if(currentState != value) {
-            print("New value is: \(value)")
-            if(value) {
-                progress.setShowSearchTrue()
-            } else {
-                progress.setShowSearchFalse()
-            }
-            currentState = value
-        }
-
-    }
+   
 
 }
 

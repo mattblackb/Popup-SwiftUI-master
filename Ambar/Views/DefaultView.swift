@@ -27,7 +27,7 @@ struct DefaultView: View {
             Preferences()
                 .tabItem {
                     VStack {
-                        Image("icons.general.home")
+                    
                         Text("Preferences")
                     }
 

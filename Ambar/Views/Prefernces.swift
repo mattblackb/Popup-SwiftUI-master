@@ -12,30 +12,31 @@ import LaunchAtLogin
 
 struct Preferences: View {
 
-    @State var searchStatus:Bool
-    @StateObject var progress = PreferencesClass()
-    @State var currentState = false;
-    
-    init() {
-         let currentStateInitial = UserDefaults.standard.object(forKey:"showSearch") as? Bool
-        searchStatus = currentStateInitial!
-        print(currentStateInitial!)
-        
-    }
- 
+    @ObservedObject var searchStatus = UserSettings()
+
     var body: some View {
-        
         VStack {
-        LaunchAtLogin.Toggle {
-                Text("Launch at login")
-            }
-        Toggle(isOn: $searchStatus) {
-                    Text("Show search bar by default")
-                }
-        .onReceive([self.searchStatus].publisher.first()) { (value) in
-                    UserDefaults.standard.set(value, forKey: "showSearch")
+            LaunchAtLogin.Toggle {
+                           Text("Launch at login")
+                       }
+            Toggle(isOn: $searchStatus.showSearch) {
+                               Text("Show search bar by default")
+                           }
+          
         }
-       }
+       
+        
+//        VStack {
+//        LaunchAtLogin.Toggle {
+//                Text("Launch at login")
+//            }
+//        Toggle(isOn: $searchStatus) {
+//                    Text("Show search bar by default")
+//                }
+//        .onReceive([self.searchStatus].publisher.first()) { (value) in
+//                    UserDefaults.standard.set(value, forKey: "showSearch")
+//        }
+//       }
      
     }
     

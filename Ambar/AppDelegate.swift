@@ -11,7 +11,6 @@ import SwiftUI
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
-    @StateObject var PreferencesObj = PreferencesClass()
     var preferencesWindow: NSWindow!    // << here
     var popover = NSPopover.init()
     var statusBar: StatusBarController?
@@ -25,7 +24,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //               let preferencesView = AddView()
                // Create the preferences window and set content
                preferencesWindow = NSWindow(
-                   contentRect: NSRect(x: 20, y: 20, width: 480, height: 350),
+                   contentRect: NSRect(x: 20, y: 20, width: 560, height: 450),
                    styleMask: [.titled, .closable, .miniaturizable, .resizable, .fullSizeContentView],
                    backing: .buffered,
                    defer: false)
@@ -45,7 +44,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
     
      let contentView = ContentView().environment(\.managedObjectContext, persistenceController.container.viewContext)
-        PreferencesClass.init()
+        
 
         // Set the SwiftUI's ContentView to the Popover's ContentViewController
         popover.contentViewController = MainViewController()
