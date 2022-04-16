@@ -32,8 +32,8 @@ struct ContentView: View {
                                 Text( item[index].name!)
                                 Spacer()
                                 Button {
-                                            NSPasteboard.general.clearContents()
-                                            NSPasteboard.general.setString( item[index].value! , forType: .string)
+                                    NSPasteboard.general.clearContents()
+                                    NSPasteboard.general.setString( item[index].value! , forType: .string)
                                     
                                          } label: {
                                              Text("Copy")
