@@ -88,6 +88,9 @@ struct AddView: View {
               fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
             }
         }
+        self.pname = ""
+        self.pdesc = ""
+        self.plink = ""
     }
     
 }
